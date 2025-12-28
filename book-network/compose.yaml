@@ -1,0 +1,9 @@
+services:
+  postgres:
+    image: 'postgres:13.5'
+    environment:
+      - 'POSTGRES_DB=book_social_network'
+      - 'POSTGRES_PASSWORD=rhimi'
+      - 'POSTGRES_USER=postgres'
+    ports:
+      - '5432'
