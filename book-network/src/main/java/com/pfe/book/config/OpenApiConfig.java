@@ -13,12 +13,11 @@ import io.swagger.v3.oas.annotations.servers.Server;
 @OpenAPIDefinition(
         info = @Info(
                 contact = @Contact(
-                        name = "Thouraya",
-                        email = "thourayarhimi67@gmail.com"
-
+                        name = "thourayaRhimi",
+                        email = "contact@pfecoding.com"
                 ),
                 description = "OpenApi documentation for Spring Security",
-                title = "OpenApi specification - Pfe",
+                title = "OpenApi specification - pfe",
                 version = "1.0",
                 license = @License(
                         name = "Licence name",
@@ -29,9 +28,12 @@ import io.swagger.v3.oas.annotations.servers.Server;
         servers = {
                 @Server(
                         description = "Local ENV",
-                        url = "http://localhost:8088"
+                        url = "http://localhost:8088/api/v1"
+                ),
+                @Server(
+                        description = "PROD ENV",
+                        url = "https://pfecoding.com/course"
                 )
-
         },
         security = {
                 @SecurityRequirement(

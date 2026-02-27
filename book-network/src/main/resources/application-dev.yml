@@ -1,7 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/book_social_network
+    url: jdbc:postgresql://localhost:5431/book_social_network12
     username: postgres
+    #username: rhimi
     password: rhimi
     driver-class-name: org.postgresql.Driver
   jpa:
@@ -14,20 +15,22 @@ spring:
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   mail:
-    host: localhost
-    port: 1025
-    username: ali
-    password: ali
+    host: smtp.gmail.com
+    port: 465
+    username: thourayarhimi67@gmail.com
+    password: elvr dudf zirw zhlw
     properties:
       mail:
         smtp:
-          trust: "*"
-        auth: true
+
+          auth: true
+          ssl:
+            enable: true
+            trust: "*"
         starttls:
           enabled: true
-        connectiontimeout: 5000
-        timeout: 3000
-        writetimeout: 5000
+    protocol: smtp
+
 
 application:
   security:
@@ -38,6 +41,9 @@ application:
         expiration: 604800000 # 7 days
   mailing:
     frontend:
-      activation-url: http://localhost:4200/activate-account?token=%s
+      activation-url: http://localhost:4200/activate-account
+  file:
+    uploads:
+      photos-output-path: ./uploads
 server:
   port: 8088
