@@ -11,6 +11,10 @@ import { RegisterComponent } from './register/register.component';
 import { ActivateAccountComponent } from './activate-account/activate-account.component';
 import { CodeInputModule } from 'angular-code-input';
 
+  export function kcFactory(kcService: KeycloakService) {
+    return () => kcService.init();
+  }
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,10 +27,23 @@ import { CodeInputModule } from 'angular-code-input';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    CodeInputModule
+    CodeInputModule,
+    apiModule.forRoot({rootUrl:'http://57.129.114.49:8088/api/v1'})
+
   ],
   providers: [
-   HttpClient
+   HttpClient,
+   {
+           provide: HTTP_INTERCEPTORS,
+           useClass: HttpTokenInterceptor,
+           multi: true
+   },
+         {
+           provide: APP_INITIALIZER,
+           deps: [KeycloakService],
+           useFactory: kcFactory,
+           multi: true
+         }
   ],
   bootstrap: [AppComponent]
 })

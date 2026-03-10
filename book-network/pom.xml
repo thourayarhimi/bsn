@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.pfe</groupId>
 	<artifactId>book-network</artifactId>
-	<version>1.0.4</version>
+	<version>1.0.5</version>
 	<name>book-network-api</name>
 	<description>Spring Boot project for book social network</description>
 	<properties>
@@ -25,10 +25,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+        </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>

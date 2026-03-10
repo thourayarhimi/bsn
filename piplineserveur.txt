@@ -1,0 +1,20 @@
+Your identification has been saved in C:\Users\Prive/.ssh/id_ed25519
+Your public key has been saved in C:\Users\Prive/.ssh/id_ed25519.pub
+The key fingerprint is:
+SHA256:HY9hTnEapHDyoEJgWsVcI75B0dWSa1NRzgWZJqv3X4Y github-deploy
+The key's randomart image is:
++--[ED25519 256]--+
+|.oo+=+*.o+=o++.  |
+|oo ooo.Bo.+B+.   |
+|. . +   o+*+o    |
+|   . o  +=.=     |
+|    .  .So+ .    |
+|        . .    . |
+|         . .  E o|
+|            .  o |
+|             ..  |
++----[SHA256]-----+
+PS C:\Users\Prive>
+
+
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIERiYLUzI6fAoJT9JhpfpVCPfFDo2XMrskfZaMosrfaO github-deploy

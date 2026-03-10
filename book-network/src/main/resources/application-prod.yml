@@ -1,0 +1,53 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5431/book_social_network12
+    username: postgres
+    #username: rhimi
+    password: rhimi
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  mail:
+    #host: smtp.gmail.com
+    #port: 465
+    #username: thourayarhimi67@gmail.com
+    #password: elvr dudf zirw zhlw
+    host: ${EMAIL_HOSTNAME}
+    port: 465
+    username: ${EMAIL_USER_NAME}
+    password: ${EMAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+
+          auth: true
+          ssl:
+            enable: true
+            trust: "*"
+        starttls:
+          enabled: true
+    protocol: smtp
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: "http://localhost:9090/realms/book-social-network"
+
+application:
+
+
+  cors:
+    origins: http://localhost:4200,http://localhost:8080,http://57.129.114.49:8080,http://57.129.114.49:8088
+  file:
+    uploads:
+      photos-output-path: ./uploads
+server:
+  port: 8088

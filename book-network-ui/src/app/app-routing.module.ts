@@ -7,6 +7,11 @@ import { authGuard } from './services/guard/auth.guard';
 
 const routes: Routes = [
   {
+    path:'',
+    redirectTo:'books',
+    pathMatch:'full'
+    }
+  {
     path: 'login',
     component: LoginComponent
   },
@@ -31,6 +36,6 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule {
- 
+
 
  }
