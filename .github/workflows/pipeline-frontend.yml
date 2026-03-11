@@ -3,12 +3,13 @@ name: BSN Frontend Pipeline
 on:
   push:
     branches:
-      - ci/pipeline
+      - main
     paths:
       - book-network-ui/**
       - docker/frontend/**
       - 'docker-compose.yml'
       - .github/workflows/*-frontend.yml
+  workflow_dispatch: # allows manual trigger from Actions tab
 jobs:
   build-image:
     name: Build FE Docker image

@@ -3,12 +3,13 @@ name: BSN Backend API Pipeline
 on:
   push:
     branches:
-      - ci/pipeline
+      - main
     paths:
       - book-network/**
       - docker/backend/**
       - 'docker-compose.yml'
       - .github/workflows/*-backend.yml
+  workflow_dispatch: # allows manual trigger from Actions tab
 
 jobs:
   compile:
