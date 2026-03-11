@@ -3,6 +3,7 @@ name: BSN Backend API Pipeline
 on:
   push:
     branches:
+      - main
       - ci/pipeline
     paths:
       - book-network/**
@@ -30,7 +31,7 @@ jobs:
           cd book-network
           ./mvnw clean compile
 
-  unit-tests:
+  unit_tests:
     runs-on: self-hosted
     name: Unit tests
     needs: compile
@@ -52,7 +53,7 @@ jobs:
   build:
     runs-on: self-hosted
     name: Build backend
-    needs: unit-tests
+    needs: unit_tests
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -68,7 +69,7 @@ jobs:
           cd book-network
           ./mvnw clean package -DskipTests
 
-  build-image:
+  build_image:
     name: Build Docker image
     runs-on: self-hosted
     needs: build
@@ -88,7 +89,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build & Push Docker image
+      - name: Build and Push Docker image
         uses: docker/build-push-action@v5
         with:
           context: book-network
@@ -102,7 +103,7 @@ jobs:
   deploy:
     name: Deploy Backend
     runs-on: self-hosted
-    needs: build-image
+    needs: build_image
     steps:
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.9.0
