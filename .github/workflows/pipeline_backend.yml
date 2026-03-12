@@ -14,6 +14,10 @@ on:
 jobs:
   compile:
     runs-on: ubuntu-latest
+    env:
+      EMAIL_HOSTNAME: ${{ secrets.EMAIL_HOST_NAME }}
+      EMAIL_USER_NAME: ${{ secrets.EMAIL_USER_NAME }}
+      EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
     name: Compile project
     steps:
       - name: Checkout code
