@@ -37,6 +37,20 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_DB: book_social_network12
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: rhimi
+        options: >-
+          --health-cmd="pg_isready -U postgres"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
     env:
       EMAIL_HOSTNAME: ${{ secrets.EMAIL_HOST_NAME }}
       EMAIL_USER_NAME: ${{ secrets.EMAIL_USER_NAME }}
