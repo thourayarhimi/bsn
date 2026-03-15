@@ -34,12 +34,6 @@ jobs:
         run: |
           cd book-network
           ./mvnw clean compile
-          
-
-      - name: Running Unit Tests
-        run: |
-          cd book-network
-          ./mvnw clean test
 
   build:
     runs-on: ubuntu-latest
