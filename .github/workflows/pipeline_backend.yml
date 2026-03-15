@@ -41,7 +41,7 @@ jobs:
       postgres:
         image: postgres:15
         ports:
-          - 5432:5432
+          - 5431:5432
         env:
           POSTGRES_DB: book_social_network12
           POSTGRES_USER: postgres
