@@ -37,6 +37,10 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+    env:
+      EMAIL_HOSTNAME: ${{ secrets.EMAIL_HOST_NAME }}
+      EMAIL_USER_NAME: ${{ secrets.EMAIL_USER_NAME }}
+      EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
     name: Build backend
     needs: [ compile ]
     steps:
@@ -59,6 +63,10 @@ jobs:
   build-image:
     name: Build Docker image
     runs-on: ubuntu-latest
+    env:
+      EMAIL_HOSTNAME: ${{ secrets.EMAIL_HOST_NAME }}
+      EMAIL_USER_NAME: ${{ secrets.EMAIL_USER_NAME }}
+      EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
     needs: [ build ]
     steps:
       - name: Checkout code
@@ -102,6 +110,10 @@ jobs:
   deploy:
     name: Deploy Backend
     runs-on: ubuntu-latest
+    env:
+      EMAIL_HOSTNAME: ${{ secrets.EMAIL_HOST_NAME }}
+      EMAIL_USER_NAME: ${{ secrets.EMAIL_USER_NAME }}
+      EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
     needs: [ build-image ]
     steps:
       - name: Setup SSH
