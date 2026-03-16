@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { KeycloakService } from 'src/app/services/keycloak/keycloak.service';
 
 @Component({
   selector: 'app-menu',
