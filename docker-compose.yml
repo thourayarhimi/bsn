@@ -30,7 +30,7 @@ services:
 
   bsn-api:
     container_name: bsn-api
-    image: bsn/bsn:1.0.5
+    image: thouraya0344/bsn-api:1.0.5
     ports:
       - 8088:8088
     networks:
