@@ -1,6 +1,6 @@
 {
   "id" : "e60675ff-c7aa-4c07-9708-62a6ea3bc3cb",
-  "realm" : "master",
+  "realm" : "bsn",
   "displayName" : "Keycloak",
   "displayNameHtml" : "<div class=\"kc-logo-text\"><span>Keycloak</span></div>",
   "notBefore" : 0,
