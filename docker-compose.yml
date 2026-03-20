@@ -34,7 +34,7 @@ services:
     command:
       - start-dev
       - --http-enabled=true
-      - --hostname=57.129.114.49
+      - --hostname=57.129.114.49:9090
       - --hostname-strict=false
       
   bsn-api:
