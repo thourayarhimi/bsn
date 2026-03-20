@@ -30,6 +30,7 @@ export class KeycloakService {
   async init() {
     const authenticated = await this.keycloak?.init({
       onLoad: 'login-required',
+      checkLoginIframe: false 
     });
 
     if (authenticated) {
