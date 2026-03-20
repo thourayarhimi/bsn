@@ -12,7 +12,7 @@ export class KeycloakService {
   get keycloak() {
     if (!this._keycloak) {
       this._keycloak = new Keycloak({
-        url: 'http://localhost:9090',
+        url: 'http://57.129.114.49:9090',
         realm: 'book-social-network',
         clientId: 'bsn'
       });
