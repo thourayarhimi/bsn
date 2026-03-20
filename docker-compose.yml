@@ -24,7 +24,7 @@ services:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
       KC_HTTP_ENABLED: "true"
-      KC_HOSTNAME: 57.129.114.49
+      KC_HOSTNAME: 57.129.114.49:9090
       KC_HOSTNAME_STRICT: "false"
       KC_HOSTNAME_STRICT_HTTPS: "false"
       KC_PROXY: edge
