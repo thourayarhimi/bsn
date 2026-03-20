@@ -5,10 +5,9 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: rhimi
-      PGDATA: /var/lib/postgresql/data
       POSTGRES_DB: book_social_network12
     volumes:
-      - postgres:/data/postgres
+      - postgres:/var/lib/postgresql/data
     ports:
       - 5431:5432
     networks:
