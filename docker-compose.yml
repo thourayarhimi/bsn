@@ -15,7 +15,7 @@ services:
       - spring-demo
     restart: unless-stopped
 
-  postgres:
+  postgres-keycloak:
     container_name: postgres-keycloak
     image: postgres
     environment:
