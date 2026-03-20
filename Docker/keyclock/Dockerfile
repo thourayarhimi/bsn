@@ -19,4 +19,4 @@ ENV KC_DB_PASSWORD=rhimi
 COPY Docker/keyclock/bsn-realm.json /opt/keycloak/data/import/
 
 # Start Keycloak and import realm automatically
-CMD ["start-dev", "--import-realm"]
+CMD ["start-dev", "--import-realm","--override=true"]
