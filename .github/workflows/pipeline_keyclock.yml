@@ -67,9 +67,9 @@ jobs:
 
           echo "Waiting for Keycloak to start..."
 
-          until docker exec bsn-keycloak sh -c "wget -q --spider http://localhost:8080"; do
-           echo "Keycloak not ready yet... waiting 5 seconds"
-           sleep 5
+          until [ "$(docker inspect -f '{{.State.Status}}' bsn-keycloak)" = "running" ]; do
+           echo "Container not running yet..."
+           sleep 3
           done
 
           echo "Keycloak is ready! Configuring..."
