@@ -13,6 +13,12 @@ services:
     networks:
       - spring-demo
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d book_social_network12"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
   postgres-keycloak:
     container_name: postgres-keycloak
@@ -28,6 +34,12 @@ services:
     networks:
       - spring-demo
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d keycloak"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
   keycloak:
     container_name: bsn-keycloak
