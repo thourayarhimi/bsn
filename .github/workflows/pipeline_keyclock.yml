@@ -73,7 +73,7 @@ jobs:
           done
 
           echo "Keycloak is ready! Configuring..."
-          docker exec bsn-keycloak /opt/keycloak/bin/kcadm.sh config credentials --server http://localhost:8080 --realm master --user admin --password admin
+          docker exec bsn-keycloak /opt/keycloak/bin/kcadm.sh config credentials --server http://localhost:9090 --realm master --user admin --password admin
           docker exec bsn-keycloak /opt/keycloak/bin/kcadm.sh update realms/master -s sslRequired=NONE
           echo "Keycloak configured successfully"
           EOF
