@@ -5,10 +5,9 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: rhimi
-      PGDATA: /var/lib/postgresql/data
       POSTGRES_DB: book_social_network12
     volumes:
-      - postgres:/data/postgres
+      - postgres_bsn:/var/lib/postgresql/data
     ports:
       - 5431:5432
     networks:
@@ -21,10 +20,9 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: rhimi
-      PGDATA: /var/lib/postgresql/data
       POSTGRES_DB: keycloak
     volumes:
-      - postgres:/data/postgres
+      - postgres_keycloak:/var/lib/postgresql/data
     ports:
       - 5432:5432
     networks:
@@ -66,5 +64,5 @@ networks:
     driver: bridge
 
 volumes:
-  postgres:
-    driver: local
+  postgres_bsn:
+  postgres_keycloak:
