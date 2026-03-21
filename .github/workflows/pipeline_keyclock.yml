@@ -65,11 +65,18 @@ jobs:
             # Wait for Keycloak container to be ready
              echo "Waiting for Keycloak to start..."
              # Wait for Keycloak to be healthy
-              echo "Waiting for Keycloak to be ready..."
-              while ! docker exec bsn-keycloak curl -s -f http://localhost:8080/health/ready > /dev/null; do
-                 echo "Keycloak not ready yet... waiting 5 seconds"
-              sleep 5 
-              done
+             while true; do
+               # Check if the main endpoint is responding
+                if docker exec bsn-keycloak curl -s -f http://localhost:8080/ > /dev/null 2>&1; then
+                  # Also check if kcadm is available
+                      if docker exec bsn-keycloak /opt/keycloak/bin/kcadm.sh > /dev/null 2>&1; then
+                    echo "Keycloak is ready!"
+                      break
+                      fi
+                        fi
+                   echo "Keycloak not ready yet... waiting 5 seconds"
+                      sleep 5
+                        done
               echo "Keycloak is ready! Configuring..."
             # Disable SSL and configure Keycloak via kcadm.sh
              docker exec bsn-keycloak /opt/keycloak/bin/kcadm.sh config credentials \
