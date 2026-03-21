@@ -57,32 +57,26 @@ jobs:
         run: scp -o StrictHostKeyChecking=no ./docker-compose.yml ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:ci-cd/docker-compose.yml
 
       - name: Set ENV variable and deploy
-        run: |
-          ssh ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} <<EOF
-          cd ci-cd
-          docker compose -f docker-compose.yml pull -q
-          docker compose -f docker-compose.yml up -d
-            # Wait for Keycloak container to be ready
-             echo "Waiting for Keycloak to start..."
-             # Wait for Keycloak to be healthy
-             while true; do
-               # Check if the main endpoint is responding
-                if docker exec bsn-keycloak curl -s -f http://localhost:8080/ > /dev/null 2>&1; then
-                  # Also check if kcadm is available
-                      if docker exec bsn-keycloak /opt/keycloak/bin/kcadm.sh > /dev/null 2>&1; then
-                    echo "Keycloak is ready!"
-                      break
-                      fi
-                        fi
-                   echo "Keycloak not ready yet... waiting 5 seconds"
-                      sleep 5
-                        done
-              echo "Keycloak is ready! Configuring..."
-            # Disable SSL and configure Keycloak via kcadm.sh
-             docker exec bsn-keycloak /opt/keycloak/bin/kcadm.sh config credentials \
-            --server http://localhost:8080 \
-            --realm master \
-            --user admin \
-            --password admin
-          docker exec bsn-keycloak /opt/keycloak/bin/kcadm.sh update realms/master -s sslRequired=NONE
-          EOF
+       run: |
+         ssh ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} <<'EOF'
+         set -e
+
+         cd ci-cd
+         docker compose -f docker-compose.yml pull -q
+         docker compose -f docker-compose.yml up -d
+
+         echo "Waiting for Keycloak to start..."
+
+         until docker exec bsn-keycloak sh -c "wget -q --spider http://localhost:8080"; do
+          echo "Keycloak not ready yet... waiting 5 seconds"
+          sleep 5
+         done
+
+         echo "Keycloak is ready! Configuring..."
+
+         docker exec bsn-keycloak /opt/keycloak/bin/kcadm.sh config credentials --server http://localhost:8080 --realm master --user admin --password admin
+
+         docker exec bsn-keycloak /opt/keycloak/bin/kcadm.sh update realms/master -s sslRequired=NONE
+
+         echo "Keycloak configured successfully"
+         EOF
