@@ -60,25 +60,20 @@ jobs:
         run: |
           ssh ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} <<'EOF'
           set -e
-
           cd ci-cd
           docker compose -f docker-compose.yml pull -q
           docker compose -f docker-compose.yml up -d
-
           echo "Waiting for Keycloak to start..."
-
           until [ "$(docker inspect -f '{{.State.Status}}' bsn-keycloak)" = "running" ]; do
            echo "Container not running yet..."
            sleep 3
           done
+          docker exec bsn-keycloak /opt/keycloak/bin/kcadm.sh config credentials \
+          --server http://localhost:8080 \
+          --realm master \
+          --user admin \
+          --password admin
 
-          
-          echo "Keycloak ready. Configuring via kcadm.sh from host..."
-           /opt/keycloak/bin/kcadm.sh config credentials \
-             --server http://127.0.0.1:9090 \
-             --realm master \
-             --user admin \
-             --password admin
-            /opt/keycloak/bin/kcadm.sh update realms/master -s sslRequired=NONE
+          docker exec bsn-keycloak /opt/keycloak/bin/kcadm.sh update realms/master -s sslRequired=NONE
           echo "Keycloak configured successfully"
           EOF
