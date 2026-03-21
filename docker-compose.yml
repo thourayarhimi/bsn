@@ -7,7 +7,7 @@ services:
       POSTGRES_PASSWORD: rhimi
       POSTGRES_DB: book_social_network12
     volumes:
-      - postgres_bsn:/var/lib/postgresql/17/data
+      - postgres_bsn:/var/lib/postgresql/data
     ports:
       - 5431:5432
     networks:
@@ -28,7 +28,7 @@ services:
       POSTGRES_PASSWORD: rhimi
       POSTGRES_DB: keycloak
     volumes:
-      - postgres_keycloak:/var/lib/postgresql/17/data
+      - postgres_keycloak:/var/lib/postgresql/data
     ports:
       - 5432:5432
     networks:
