@@ -1,13 +1,13 @@
 services:
   postgres:
     container_name: postgres-sql-bsn
-    image: postgres
+    image: postgres:17
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: rhimi
       POSTGRES_DB: book_social_network12
     volumes:
-      - postgres_bsn:/var/lib/postgresql/data
+      - postgres_bsn:/var/lib/postgresql/17/data
     ports:
       - 5431:5432
     networks:
@@ -16,13 +16,13 @@ services:
 
   postgres-keycloak:
     container_name: postgres-keycloak
-    image: postgres
+    image: postgres:17
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: rhimi
       POSTGRES_DB: keycloak
     volumes:
-      - postgres_keycloak:/var/lib/postgresql/data
+      - postgres_keycloak:/var/lib/postgresql/17/data
     ports:
       - 5432:5432
     networks:
@@ -35,7 +35,9 @@ services:
     ports:
       - 9090:8080
     depends_on:
-      - postgres-keycloak
+      postgres-keycloak:
+        condition: service_healthy
+      
     networks:
       - spring-demo
     restart: unless-stopped
@@ -46,10 +48,10 @@ services:
     ports:
       - 8088:8088
     networks:
-
       - spring-demo
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
   bsn-ui:
     container_name: bsn-ui
     image: thouraya0344/bsn-ui:latest
