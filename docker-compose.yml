@@ -53,6 +53,12 @@ services:
     networks:
       - spring-demo
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health/ready"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
       
   bsn-api:
     container_name: bsn-api
