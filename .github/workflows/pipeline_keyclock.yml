@@ -61,7 +61,7 @@ jobs:
           ssh ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} <<EOF
           cd ci-cd
           docker compose -f docker-compose.yml pull -q
-          docker compose -f docker-compose.yml down -v -d
+          
           docker compose -f docker-compose.yml up -d
             # Wait for Keycloak container to be ready
              echo "Waiting for Keycloak to start..."
