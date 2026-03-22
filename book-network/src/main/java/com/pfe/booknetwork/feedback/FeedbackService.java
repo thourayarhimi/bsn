@@ -4,7 +4,6 @@ import com.pfe.booknetwork.book.Book;
 import com.pfe.booknetwork.book.BookRepository;
 import com.pfe.booknetwork.common.PageResponse;
 import com.pfe.booknetwork.exception.OperationNotPermittedException;
-import com.pfe.booknetwork.user.User;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -42,10 +41,9 @@ public class FeedbackService {
     @Transactional
     public PageResponse<FeedbackResponse> findAllFeedbacksByBook(Integer bookId, int page, int size, Authentication connectedUser) {
         Pageable pageable = PageRequest.of(page, size);
-        User user = ((User) connectedUser.getPrincipal());
         Page<Feedback> feedbacks = feedBackRepository.findAllByBookId(bookId, pageable);
         List<FeedbackResponse> feedbackResponses = feedbacks.stream()
-                .map(f -> feedbackMapper.toFeedbackResponse(f, user.getId()))
+                .map(f -> feedbackMapper.toFeedbackResponse(f, connectedUser.getName()))
                 .toList();
         return new PageResponse<>(
                 feedbackResponses,

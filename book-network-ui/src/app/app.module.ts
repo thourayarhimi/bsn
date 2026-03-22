@@ -31,9 +31,6 @@ import { KeycloakService } from './services/keycloak/keycloak.service';
     FormsModule,
     CodeInputModule,
     RouterModule,
-    
-    //AppModule.forRoot({rootUrl:'http://57.129.114.49:8088/api/v1'})
-
   ],
   providers: [
    HttpClient,
