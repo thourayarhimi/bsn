@@ -18,8 +18,6 @@ public class ApplicationAuditAware implements AuditorAware<String> {
             return Optional.empty();
         }
 
-       // User userPrincipal = (User) authentication.getPrincipal();
-
         return Optional.ofNullable(authentication.getName());
     }
 }

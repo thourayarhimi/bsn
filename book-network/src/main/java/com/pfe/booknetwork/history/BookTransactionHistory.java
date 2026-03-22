@@ -20,9 +20,7 @@ import lombok.experimental.SuperBuilder;
 @Entity
 public class BookTransactionHistory extends BaseEntity {
 
-    //@ManyToOne
-    //@JoinColumn(name = "user_id")
-    //private User user;
+
     @Column(name="user_id")
     private String userId;
     @ManyToOne

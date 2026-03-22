@@ -29,11 +29,11 @@ public class FeedbackService {
         Book book = bookRepository.findById(request.bookId())
                 .orElseThrow(() -> new EntityNotFoundException("No booknetwork found with ID:: " + request.bookId()));
         if (book.isArchived() || !book.isShareable()) {
-            throw new OperationNotPermittedException("You cannot give a feedback for and archived or not shareable booknetwork");
+            throw new OperationNotPermittedException("You cannot give a feedback for and archived or not shareable book");
         }
-       // User user = ((User) connectedUser.getPrincipal());
+
         if (Objects.equals(book.getCreatedBy(), connectedUser.getName())) {
-            throw new OperationNotPermittedException("You cannot give feedback to your own booknetwork");
+            throw new OperationNotPermittedException("You cannot give feedback to your own book");
         }
         Feedback feedback = feedbackMapper.toFeedback(request);
         return feedBackRepository.save(feedback).getId();
