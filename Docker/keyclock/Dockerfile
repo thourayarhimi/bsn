@@ -16,7 +16,7 @@ ENV KC_DB_USERNAME=postgres
 ENV KC_DB_PASSWORD=rhimi
 
 # Copy realm
-#COPY Docker/keyclock/bsn-realm.json /opt/keycloak/data/import/
+COPY Docker/keyclock/book-social-network.json /opt/keycloak/data/import/
 
 # Start Keycloak and import realm automatically
-CMD ["start-dev"]
+CMD ["start-dev", "--import-realm"]
