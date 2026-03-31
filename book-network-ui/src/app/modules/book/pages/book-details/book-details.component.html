@@ -7,7 +7,7 @@
   <!-- Book Cover -->
   <div class="img">
     <img
-                [src]="book.cover?.length ? book.cover![0] : '/assets/images/book-1.jpg'"
+                [src]="book.cover?.length ? 'data:image/jpg;base64,' + book.cover![0] : '/assets/images/book-1.jpg'"
                 [alt]="book.title"
               />
   </div>
@@ -74,7 +74,7 @@
     </div>
 
     <div class="input-group">
-      <button class="cartbtn" (click)="borrowBook()">
+      <button class="cartbtn" (click)="borrowBook(book)">
         <i class="fa-solid fa-book-open"></i> Borrow
       </button>
       <button class="like" (click)="toggleLike()" [class.liked]="liked">

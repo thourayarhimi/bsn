@@ -36,50 +36,6 @@ export class BookListComponent implements OnInit {
 
   ngOnInit(): void {
     this.findAllBooks();
-    this.bookResponse = {
-      content: [
-        {
-          id: 1,
-          title: 'The Giver',
-          authorName: 'Lois Lowry',
-          rate: 5,
-          shareable: true,
-          archived: false,
-          isbn: '978-0-395-64566-6',
-          synopsis: 'A boy discovers the dark secrets of his seemingly perfect community.',
-          cover: []
-        },
-        {
-          id: 2,
-          title: 'To Kill a Mockingbird',
-          authorName: 'Harper Lee',
-          rate: 4,
-          shareable: true,
-          archived: false,
-          isbn: '978-0-06-112008-4',
-          synopsis: 'A story of racial injustice and loss of innocence in the American South.',
-          cover: []
-        },
-        {
-          id: 3,
-          title: '1984',
-          authorName: 'George Orwell',
-          rate: 3,
-          shareable: false,
-          archived: true,
-          isbn: '978-0-452-28423-4',
-          synopsis: 'A dystopian novel about totalitarianism and surveillance.',
-          cover: []
-        }
-      ],
-      totalElements: 3,
-      totalPages: 1,
-      first: true,
-      last: true,
-      number: 0,
-      size: 5
-    };
-    this.pages = [0];
   }
 
   private findAllBooks() {

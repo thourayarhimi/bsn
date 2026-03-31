@@ -4,6 +4,7 @@ import {BookService} from '../../../../services/services/book.service';
 import {ActivatedRoute} from '@angular/router';
 import {FeedbackService} from '../../../../services/services/feedback.service';
 import {PageResponseFeedbackResponse} from '../../../../services/models/page-response-feedback-response';
+import { PageResponseBookResponse } from 'src/app/services/models';
 
 @Component({
   selector: 'app-book-details',
@@ -12,13 +13,13 @@ import {PageResponseFeedbackResponse} from '../../../../services/models/page-res
   encapsulation: ViewEncapsulation.None
 })
 export class BookDetailsComponent implements OnInit {
+  
 liked: any;
-toggleLike() {
-throw new Error('Method not implemented.');
-}
-borrowBook() {
-throw new Error('Method not implemented.');
-}
+message = '';
+level: 'success' |'error' = 'success';
+
+
+
   book: BookResponse = {};
   feedbacks: PageResponseFeedbackResponse = {};
   page = 0;
@@ -46,25 +47,6 @@ throw new Error('Method not implemented.');
     }
 
 
-        this.book = {
-          id: 1,
-          title: 'The Giver',
-          authorName: 'Lois Lowry',
-          rate: 4,
-          shareable: true,
-          archived: false,
-          isbn: '978-0-395-64566-6',
-          synopsis: 'A boy discovers the dark secrets of his seemingly perfect community.',
-          owner: 'John Doe',
-          cover: []
-        };
-        this.feedbacks = {
-          content: [],
-          totalElements: 0,
-          totalPages: 0
-        };
-        this.pages = [];
-      
   }
 
   private findAllFeedbacks() {
@@ -107,5 +89,24 @@ throw new Error('Method not implemented.');
   get isLastPage() {
     return this.page === this.feedbacks.totalPages as number - 1;
   }
-
+  borrowBook(book: BookResponse) {
+    this.message = '';
+    this.level = 'success';
+    this.bookService.borrowBook({
+      'book-id': book.id as number
+    }).subscribe({
+      next: () => {
+        this.level = 'success';
+        this.message = 'Book successfully added to your list';
+      },
+      error: (err) => {
+        console.log(err);
+        this.level = 'error';
+        this.message = err.error.error;
+      }
+    });
+  }
+  toggleLike() {
+    throw new Error('Method not implemented.');
+    }
 }
