@@ -1,3 +1,103 @@
 i {
   cursor: pointer;
 }
+.borrowed-table {
+  margin-top: 1rem;
+  overflow-x: auto;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+
+    thead tr {
+      background-color: #6c5dd4;
+      color: #fff;
+
+      th {
+        padding: 12px 15px;
+        text-align: left;
+        font-weight: 600;
+      }
+    }
+
+    tbody tr {
+      border-bottom: 1px solid #f0f0f0;
+      transition: 0.2s ease-in-out;
+
+      &:hover {
+        background-color: #f9f8ff;
+      }
+
+      td {
+        padding: 12px 15px;
+        color: #131428;
+      }
+    }
+  }
+}
+
+.rate-badge {
+  background-color: #fff8e7;
+  color: #fd7747;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.action-icons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 16px;
+
+  i {
+    position: relative;
+    cursor: pointer;
+
+    &::after {
+      content: attr(title);
+      position: absolute;
+      bottom: 130%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #131428;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 4px 8px;
+      border-radius: 5px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.2s ease-in-out;
+      font-style: normal;
+    }
+
+    &:hover::after {
+      opacity: 1;
+    }
+  }
+
+  .returned {
+    color: #b0b0b0;
+    cursor: default;
+  }
+
+  .returnable {
+    color: #6c5dd4;
+
+    &:hover {
+      color: #5a4bbf;
+    }
+  }
+
+  .approved {
+    color: #56c156;
+  }
+
+  .pending {
+    color: #f0f0f0;
+  }
+}

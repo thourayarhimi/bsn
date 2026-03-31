@@ -1,4 +1,4 @@
-<div
+<!--<div
   class="card"
   style="width: 20rem;"
   [class.border-success]="book.shareable"
@@ -30,5 +30,59 @@
       <i (click)="onShare()" class="fas fa-share-nodes text-primary"></i>
       <i (click)="onArchive()" class="fas fa-archive text-danger"></i>
     </div>
+  </div>
+</div>  <img [src]="bookCover" [alt]="book.title" />
+-->
+
+<div class="book-card">
+  <div class="img">
+    <a (click)="onShowDetails()">
+    
+      <img
+      [src]="book.cover?.length ? book.cover![0] : 'assets/images/book-1.jpg'"
+      [alt]="book.title"
+    />
+    </a>
+    <button class="like" id="likebtn"(click)="toggleLike(book)">
+      <i class="fa-heart"
+        [class.fa-solid]="isLiked(book)"
+        [class.fa-regular]="!isLiked(book)"
+      ></i>
+    </button>
+    <span class="pill archived-pill" *ngIf="book.archived">Archived</span>
+    <span class="pill shareable-pill" *ngIf="book.shareable && !book.archived">Shareable</span>
+  </div>
+
+  <h5>{{ book.title }}</h5>
+
+  <small>
+    <a>{{ book.authorName }}</a>
+  </small>
+
+  <div class="star-rating">
+    <app-rating [rating]="book.rate || 0"></app-rating>
+  </div>
+
+  <!-- Normal mode: borrow + details -->
+  <div class="card-actions" *ngIf="!manage">
+    <button class="borrow-btn" (click)="onBorrow()" [disabled]="!book.shareable || book.archived">
+      <i class="fas fa-book-open"></i> Borrow
+    </button>
+    <button class="details-btn" (click)="onShowDetails()">
+      <i class="fas fa-circle-info"></i>
+    </button>
+  </div>
+
+  <!-- Manage mode: edit + share + archive -->
+  <div class="card-actions" *ngIf="manage">
+    <button class="borrow-btn" (click)="onEdit()">
+      <i class="fas fa-edit"></i> Edit
+    </button>
+    <button class="details-btn" (click)="onShare()">
+      <i class="fas fa-share-nodes"></i>
+    </button>
+    <button class="archive-btn" (click)="onArchive()">
+      <i class="fas fa-archive"></i>
+    </button>
   </div>
 </div>

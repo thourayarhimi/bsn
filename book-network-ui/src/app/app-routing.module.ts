@@ -1,27 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './pages/login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { ActivateAccountComponent } from './activate-account/activate-account.component';
 import { authGuard } from './services/guard/auth.guard';
+import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
   {
-    path:'',
-    redirectTo:'books',
-    pathMatch:'full'
-    },
-  {
-    path: 'login',
-    component: LoginComponent
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
   },
   {
-    path: 'register',
-    component: RegisterComponent
-  },
-  {
-    path: 'activate-account',
-    component: ActivateAccountComponent
+    path: 'home',
+    component: HomeComponent,
   },
   {
     path: 'books',
@@ -38,4 +28,4 @@ const routes: Routes = [
 export class AppRoutingModule {
 
 
- }
+}

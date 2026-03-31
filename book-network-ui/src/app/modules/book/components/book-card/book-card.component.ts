@@ -10,6 +10,7 @@ export class BookCardComponent {
   private _book: BookResponse = {};
   private _manage = false;
   private _bookCover: string | undefined;
+  private likedBooks = new Set<number>();
 
   get bookCover(): string | undefined {
     if (this._book.cover) {
@@ -66,5 +67,14 @@ export class BookCardComponent {
 
   onShowDetails() {
     this.details.emit(this._book);
+  }
+ 
+  toggleLike(book: BookResponse) {
+    const id = book.id as number;
+    this.likedBooks.has(id) ? this.likedBooks.delete(id) : this.likedBooks.add(id);
+  }
+
+  isLiked(book: BookResponse): boolean {
+    return this.likedBooks.has(book.id as number);
   }
 }

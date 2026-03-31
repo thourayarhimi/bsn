@@ -23,6 +23,7 @@ export class ReturnedBooksComponent implements OnInit {
 
   ngOnInit(): void {
     this.findAllReturnedBooks();
+    
   }
 
   private findAllReturnedBooks() {

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {BookResponse} from '../../../../services/models/book-response';
 import {BookService} from '../../../../services/services/book.service';
 import {ActivatedRoute} from '@angular/router';
@@ -8,9 +8,17 @@ import {PageResponseFeedbackResponse} from '../../../../services/models/page-res
 @Component({
   selector: 'app-book-details',
   templateUrl: './book-details.component.html',
-  styleUrls: ['./book-details.component.scss']
+  styleUrls: ['./book-details.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class BookDetailsComponent implements OnInit {
+liked: any;
+toggleLike() {
+throw new Error('Method not implemented.');
+}
+borrowBook() {
+throw new Error('Method not implemented.');
+}
   book: BookResponse = {};
   feedbacks: PageResponseFeedbackResponse = {};
   page = 0;
@@ -36,6 +44,27 @@ export class BookDetailsComponent implements OnInit {
         }
       });
     }
+
+
+        this.book = {
+          id: 1,
+          title: 'The Giver',
+          authorName: 'Lois Lowry',
+          rate: 4,
+          shareable: true,
+          archived: false,
+          isbn: '978-0-395-64566-6',
+          synopsis: 'A boy discovers the dark secrets of his seemingly perfect community.',
+          owner: 'John Doe',
+          cover: []
+        };
+        this.feedbacks = {
+          content: [],
+          totalElements: 0,
+          totalPages: 0
+        };
+        this.pages = [];
+      
   }
 
   private findAllFeedbacks() {

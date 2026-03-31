@@ -1,4 +1,4 @@
-<h3>My books list</h3>
+<!--<h3>My books list</h3>
 <hr>
 <div class="d-flex justify-content-end mb-3">
   <a routerLink="/books/manage" class="btn btn-outline-primary">
@@ -75,4 +75,67 @@
       </li>
     </ul>
   </nav>
-</div>
+</div>-->
+<section class="filter">
+  <div class="book-grid-container">
+    <div class="book-collections">
+
+      <div class="collections-header">
+        <h4>My Books</h4>
+        <a routerLink="/books/manage" class="new-book-btn">
+          <i class="fas fa-plus"></i> New Book
+        </a>
+      </div>
+
+      <div class="category">
+        <div class="category-list">
+          <button>Today</button>
+          <button>This Week</button>
+          <button>This Month</button>
+        </div>
+      </div>
+
+      <!-- Book Cards -->
+      <div class="books">
+        <app-book-card
+          *ngFor="let book of bookResponse.content"
+          [book]="book"
+          [manage]="true"
+          (archive)="archiveBook($event)"
+          (share)="shareBook($event)"
+          (edit)="editBook($event)"
+        ></app-book-card>
+      </div>
+
+      <!-- Footer Pagination -->
+      <div class="footer">
+        <div class="data-shown">
+          <p>Showing {{ bookResponse.content?.length }} from {{ bookResponse.totalElements }} data</p>
+        </div>
+        <div class="pagination">
+          <button (click)="goToFirstPage()" [disabled]="page === 0">
+            <i class="fas fa-angles-left"></i>
+          </button>
+          <button (click)="goToPreviousPage()" [disabled]="page === 0">
+            <i class="fas fa-chevron-left"></i> Previous
+          </button>
+          <div class="number">
+            
+             <a *ngFor="let pageIndex of pages"
+              href="javascript:void(0)"
+              (click)="gotToPage(pageIndex)"
+              [class.active]="page === pageIndex"
+            >{{ pageIndex + 1 }}</a>
+          </div>
+          <button (click)="goToNextPage()" [disabled]="isLastPage">
+            Next <i class="fas fa-chevron-right"></i>
+          </button>
+          <button (click)="goToLastPage()" [disabled]="isLastPage">
+            <i class="fas fa-angles-right"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

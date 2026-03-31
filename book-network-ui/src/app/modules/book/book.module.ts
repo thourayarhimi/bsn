@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { BookRoutingModule } from './book-routing.module';
 import { MainComponent } from './pages/main/main.component';
-import { MenuComponent } from './components/menu/menu.component';
+
 import { BookListComponent } from './pages/book-list/book-list.component';
 import { BookCardComponent } from './components/book-card/book-card.component';
 import { MyBooksComponent } from './pages/my-books/my-books.component';
@@ -14,11 +14,13 @@ import { RatingComponent } from './components/rating/rating.component';
 import { ReturnedBooksComponent } from './pages/returned-books/returned-books.component';
 import { BookDetailsComponent } from './pages/book-details/book-details.component';
 
+import { SharedModule } from 'src/app/shared/shared.module';
+
 
 @NgModule({
   declarations: [
     MainComponent,
-    MenuComponent,
+   
     BookListComponent,
     BookCardComponent,
     MyBooksComponent,
@@ -31,7 +33,8 @@ import { BookDetailsComponent } from './pages/book-details/book-details.componen
   imports: [
     CommonModule,
     BookRoutingModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ]
 })
 export class BookModule { }

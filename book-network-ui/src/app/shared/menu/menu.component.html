@@ -1,0 +1,45 @@
+
+
+  <nav class="navbar">
+    <div class="logo">
+      <div class="img">
+        <img src="assets/images/logo.png" alt="" />
+      </div>
+      <div class="logo-header">
+        <h4><a routerLink="/home">BSN</a></h4>
+        <small>Book Share Network</small>
+      </div>
+    </div>
+
+    <ul class="nav-list">
+      <div class="logo">
+        <div class="title">
+          <div class="logo-header">
+            <h4><a routerLink="/home">Bookoe</a></h4>
+            <small>Book Store Website</small>
+          </div>
+        </div>
+        <button class="close"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <li><a routerLink="/home">Home</a></li>
+      <li><a routerLink="/books">Books</a></li>
+      <li><a routerLink="/books/my-books">My Books</a></li>
+      <li><a routerLink="/books/my-returned-books">My Returned Books</a></li>
+      <li><a routerLink="/books/my-borrowed-books">My Borrowed Books</a></li>
+
+      <button class="login" *ngIf="!isLoggedIn" (click)="login()">
+        Log In
+      </button>
+      
+      <button class="signup" *ngIf="isLoggedIn" (click)="logout()">
+        <i class="fa-solid fa-user"></i> {{ userProfile?.firstName || 'Log out' }}
+      </button>
+    </ul>
+
+    <div class="hamburger">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+  </nav>

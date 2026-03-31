@@ -5,13 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
-import { LoginComponent } from './pages/login/login.component';
+
 import { FormsModule } from '@angular/forms';
-import { RegisterComponent } from './register/register.component';
-import { ActivateAccountComponent } from './activate-account/activate-account.component';
+
+
 import { CodeInputModule } from 'angular-code-input';
 import { HttpTokenInterceptor } from './services/interceptor/http-token.interceptor';
 import { KeycloakService } from './services/keycloak/keycloak.service';
+import { HomeComponent } from './pages/home/home.component';
+
+import { SharedModule } from './shared/shared.module';
 
   export function kcFactory(kcService: KeycloakService) {
     return () => kcService.init();
@@ -20,9 +23,7 @@ import { KeycloakService } from './services/keycloak/keycloak.service';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    ActivateAccountComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -31,6 +32,7 @@ import { KeycloakService } from './services/keycloak/keycloak.service';
     FormsModule,
     CodeInputModule,
     RouterModule,
+    SharedModule
   ],
   providers: [
    HttpClient,
@@ -39,7 +41,7 @@ import { KeycloakService } from './services/keycloak/keycloak.service';
            useClass: HttpTokenInterceptor,
            multi: true
    },
-         {
+        {
            provide: APP_INITIALIZER,
            deps: [KeycloakService],
            useFactory: kcFactory,
