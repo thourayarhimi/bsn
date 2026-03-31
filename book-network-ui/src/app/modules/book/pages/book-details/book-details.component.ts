@@ -109,4 +109,10 @@ level: 'success' |'error' = 'success';
   toggleLike() {
     throw new Error('Method not implemented.');
     }
+    get bookCover(): string | undefined {
+      if (this.book.cover) {
+        return 'data:image/jpg;base64,' + this.book.cover
+      }
+      return 'assets/images/book-1.jpg';
+    }
 }
