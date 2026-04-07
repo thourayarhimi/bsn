@@ -1,6 +1,7 @@
 services:
   postgres:
     container_name: postgres-sql-bsn
+    restart: unless-stopped
     image: postgres:17
     environment:
       POSTGRES_USER: postgres
@@ -22,6 +23,7 @@ services:
 
   postgres-keycloak:
     container_name: postgres-keycloak
+    restart: unless-stopped
     image: postgres:17
     environment:
       POSTGRES_USER: postgres
@@ -63,6 +65,7 @@ services:
   bsn-api:
     container_name: bsn-api
     image: thouraya0344/bsn-api:1.0.5
+    restart: unless-stopped
     ports:
       - 8088:8088
     networks:
@@ -70,8 +73,11 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+    volumes:
+      - ./uploads:/uploads
   bsn-ui:
     container_name: bsn-ui
+    restart: unless-stopped
     image: thouraya0344/bsn-ui:latest
     ports:
       - 8080:80
