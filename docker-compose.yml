@@ -13,7 +13,7 @@ services:
       - 5431:5432
     networks:
       - spring-demo
-    restart: unless-stopped
+
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres -d book_social_network12"]
       interval: 10s
@@ -35,7 +35,7 @@ services:
       - 5432:5432
     networks:
       - spring-demo
-    restart: unless-stopped
+    
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres -d keycloak"]
       interval: 10s
