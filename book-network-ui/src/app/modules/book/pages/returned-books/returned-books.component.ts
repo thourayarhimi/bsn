@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {PageResponseBorrowedBookResponse} from '../../../../services/models/page-response-borrowed-book-response';
 import {BookService} from '../../../../services/services/book.service';
 import {BorrowedBookResponse} from '../../../../services/models/borrowed-book-response';
@@ -6,7 +6,8 @@ import {BorrowedBookResponse} from '../../../../services/models/borrowed-book-re
 @Component({
   selector: 'app-returned-books',
   templateUrl: './returned-books.component.html',
-  styleUrls: ['./returned-books.component.scss']
+  styleUrls: ['./returned-books.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ReturnedBooksComponent implements OnInit {
 

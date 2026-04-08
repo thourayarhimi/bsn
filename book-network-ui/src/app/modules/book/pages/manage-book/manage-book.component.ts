@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {BookRequest} from '../../../../services/models/book-request';
 import {BookService} from '../../../../services/services/book.service';
 import {ActivatedRoute, Router} from '@angular/router';
