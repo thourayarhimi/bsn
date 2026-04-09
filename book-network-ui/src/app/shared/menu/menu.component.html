@@ -32,8 +32,16 @@
         Log In
       </button>
       
+
+
+      <li *ngIf="isLoggedIn">
+        <a (click)="goToProfile()">
+          <i class="fa-solid fa-user"></i> {{ userProfile?.firstName }}
+        </a>
+      </li>
+      
       <button class="signup" *ngIf="isLoggedIn" (click)="logout()">
-        <i class="fa-solid fa-user"></i> {{ userProfile?.firstName || 'Log out' }}
+        Logout
       </button>
     </ul>
 

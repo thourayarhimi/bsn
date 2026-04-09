@@ -7,6 +7,7 @@ import { KeycloakService } from 'src/app/services/keycloak/keycloak.service';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
+
   constructor(private keycloakService: KeycloakService) {}
 
   ngOnInit(): void {}
@@ -26,4 +27,7 @@ export class MenuComponent implements OnInit {
   logout() {
     this.keycloakService.logout();
   }
+  goToProfile() {
+    this.keycloakService.profileManagment();
+    }
 }
