@@ -20,7 +20,7 @@ const routes: Routes = [
       {
         path: '',
         component: BookListComponent,
-       canActivate: [authGuard]
+        canActivate: [authGuard]
       },
       {
         path: 'my-books',
