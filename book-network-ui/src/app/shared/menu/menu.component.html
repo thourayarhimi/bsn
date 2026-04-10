@@ -35,7 +35,7 @@
 
 
       <li *ngIf="isLoggedIn">
-        <a (click)="goToProfile()">
+        <a (click)="goToProfile()" style="cursor: pointer !important;">
           <i class="fa-solid fa-user"></i> {{ userProfile?.firstName }}
         </a>
       </li>

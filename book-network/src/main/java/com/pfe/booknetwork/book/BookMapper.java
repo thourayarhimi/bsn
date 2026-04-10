@@ -39,6 +39,8 @@ public class BookMapper {
                 .authorName(history.getBook().getAuthorName())
                 .isbn(history.getBook().getIsbn())
                 .rate(history.getBook().getRate())
+                .borrowedBy(history.getUserId())                // who borrowed
+                .ownedBy(history.getBook().getCreatedBy())      // who owns (BaseEntity field)
                 .returned(history.isReturned())
                 .returnApproved(history.isReturnApproved())
                 .build();

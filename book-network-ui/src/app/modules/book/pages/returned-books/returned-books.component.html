@@ -33,6 +33,7 @@
               <th>Author</th>
               <th>ISBN</th>
               <th>Rate</th>
+              <th>Borrowed By</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -45,6 +46,7 @@
               <td>
                 <span class="rate-badge">★ {{ book.rate }}</span>
               </td>
+              <td>{{book.borrowedBy}}</td>
               <td>
                 <div class="action-icons">
                   <i
