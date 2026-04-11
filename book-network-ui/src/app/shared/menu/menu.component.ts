@@ -147,23 +147,14 @@ export class MenuComponent implements OnInit , OnDestroy {
     
 
 
+
   ngOnDestroy() {
-
-
     if (this.socketClient !== null) {
-
-
+      if (this.notificationSubscription) {
+        this.notificationSubscription.unsubscribe();
+      }
       this.socketClient.disconnect();
-
-
-      this.notificationSubscription.unsubscribe();
-
-
       this.socketClient = null;
-
-
     }
-
-
   }
 }
