@@ -11,7 +11,8 @@ import {ToastrService} from 'ngx-toastr';
 
 
 import {Notification}  from './Notification'
-import { Stomp } from '@stomp/stompjs';
+import * as Stomp from 'stompjs';
+
 import * as SockJS from 'sockjs-client';
 
 @Component({
@@ -36,42 +37,107 @@ export class MenuComponent implements OnInit , OnDestroy {
  
 
   
-ngOnInit(): void {
-  if (this.keycloakService.keycloak.tokenParsed?.sub) {
-  //  this.socketClient = Stomp.over(() => new SockJS('http://57.129.114.49:8088/api/v1/ws'));
-    this.socketClient = Stomp.over(() => new SockJS('/api/v1/ws'));
 
-    
-    this.socketClient.connect(
-      { 'Authorization': 'Bearer ' + this.keycloakService.keycloak.token },
-      () => {
+
+ngOnInit(): void {
+
+
+
+
+  if (this.keycloakService.keycloak.tokenParsed?.sub) {
+
+
+    let ws = new SockJS('http://57.129.114.49:8088/api/v1/ws');
+
+
+    this.socketClient = Stomp.over(ws);
+
+
+    this.socketClient.connect({'Authorization': 'Bearer ' + this.keycloakService.keycloak.token}, () => {
+
+
         this.notificationSubscription = this.socketClient.subscribe(
+
+
           `/user/${this.keycloakService.keycloak.tokenParsed?.sub}/notifications`,
+
+
           (message: any) => {
+
+
             const notification = JSON.parse(message.body);
+
+
             if (notification) {
+
+
               this.notifications.unshift(notification);
-              this.unreadNotificationsCount++;
+
+
               switch (notification.status) {
+
+
                 case 'BORROWED':
+
+
                   this.toastService.info(notification.message, notification.bookTitle);
+
+
                   break;
+
+
                 case 'RETURNED':
+
+
                   this.toastService.warning(notification.message, notification.bookTitle);
+
+
                   break;
+
+
                 case 'RETURN_APPROVED':
+
+
                   this.toastService.success(notification.message, notification.bookTitle);
+
+
                   break;
+
+
               }
+
+
+              this.unreadNotificationsCount++;
+
+
             }
-          }
-        );
-      },
-      () => {
-        console.error('Error while connecting to webSocket');
+
+
+
+
+
+
+
+
+          }, () => {
+
+
+            console.error('Error while connecting to webSocket');
+
+
+          });
+
       }
+
+
+   
+
+
     );
+
   }
+
+
 }
 
   get isLoggedIn(): boolean {
