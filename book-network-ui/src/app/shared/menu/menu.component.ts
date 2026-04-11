@@ -9,12 +9,9 @@ import { KeycloakService } from 'src/app/services/keycloak/keycloak.service';
 import {ToastrService} from 'ngx-toastr';
 
 
-import * as Stomp from 'stompjs';
-
-
-import * as SockJS from 'sockjs-client';
 
 import {Notification}  from './Notification'
+import { Stomp } from '@stomp/stompjs';
 
 @Component({
   selector: 'app-menu',
@@ -42,7 +39,7 @@ export class MenuComponent implements OnInit , OnDestroy {
 
 
 
-      let ws = new SockJS('http://57.129.114.49:8088/api/v1/ws');
+      let ws = new WebSocket('http://57.129.114.49:8088/api/v1/ws');
 
 
       this.socketClient = Stomp.over(ws);
