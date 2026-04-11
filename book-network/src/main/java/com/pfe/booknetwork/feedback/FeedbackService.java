@@ -2,8 +2,10 @@ package com.pfe.booknetwork.feedback;
 
 import com.pfe.booknetwork.book.Book;
 import com.pfe.booknetwork.book.BookRepository;
+import com.pfe.booknetwork.book.BorrowedBookResponse;
 import com.pfe.booknetwork.common.PageResponse;
 import com.pfe.booknetwork.exception.OperationNotPermittedException;
+import com.pfe.booknetwork.keycloak.KeycloakUserService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -23,6 +25,7 @@ public class FeedbackService {
     private final FeedBackRepository feedBackRepository;
     private final BookRepository bookRepository;
     private final FeedbackMapper feedbackMapper;
+    private final KeycloakUserService keycloakUserService;
 
     public Integer save(FeedbackRequest request, Authentication connectedUser) {
         Book book = bookRepository.findById(request.bookId())
@@ -42,8 +45,17 @@ public class FeedbackService {
     public PageResponse<FeedbackResponse> findAllFeedbacksByBook(Integer bookId, int page, int size, Authentication connectedUser) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Feedback> feedbacks = feedBackRepository.findAllByBookId(bookId, pageable);
-        List<FeedbackResponse> feedbackResponses = feedbacks.stream()
+      /*  List<FeedbackResponse> feedbackResponses = feedbacks.stream()
                 .map(f -> feedbackMapper.toFeedbackResponse(f, connectedUser.getName()))
+                .toList();*/
+
+        List<FeedbackResponse> feedbackResponses = feedbacks.stream()
+                .map(f -> {
+                    FeedbackResponse response = feedbackMapper.toFeedbackResponse(f, connectedUser.getName());
+                    response.setUser(keycloakUserService.getUserFullName(f.getCreatedBy()));
+
+                    return response;
+                })
                 .toList();
         return new PageResponse<>(
                 feedbackResponses,

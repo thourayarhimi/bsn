@@ -85,53 +85,70 @@
   </div>
 </section>
 
+
 <!-- Feedbacks -->
 <div class="book-info">
   <div class="detail-customer">
     <div class="customer-review" style="display:block">
 
+      <h4 style="font-size: 16px; font-weight: 600; color: #131428; margin-bottom: 1rem;">
+        Customer Reviews
+        <span style="font-size: 12px; color: #b0b0b0; font-weight: 400; margin-left: 0.5rem;">
+          ({{ feedbacks.totalElements || 0 }})
+        </span>
+      </h4>
+
+      <!-- Empty State -->
+      <div class="empty-feedback" *ngIf="!feedbacks.content?.length">
+        <p>No reviews yet.</p>
+      </div>
+
       <div *ngFor="let feedback of feedbacks.content" class="reviewer-container">
         <div class="review">
+          <div class="img-detail">
+            <div class="avatar">{{ feedback.user ? feedback.user.charAt(0) : 'A' }}</div>
+            <div>
+              <h5>{{feedback.user}}</h5>
+              <small>Verified Reader</small>
+            </div>
+          </div>
           <div class="review-footer">
             <p>{{ feedback.comment }}</p>
             <div class="rating-star">
-              <i
-                *ngFor="let star of [1, 2, 3, 4, 5]"
-                class="fa-star"
-                [class.fa-solid]="star <= (feedback.note || 0)"
-                [class.fa-regular]="star > (feedback.note || 0)"
-              ></i>
+              <span *ngFor="let star of [1, 2, 3, 4, 5]">
+                {{ star <= (feedback.note || 0) ? '★' : '☆' }}
+              </span>
               <strong>{{ feedback.note }}</strong>
             </div>
           </div>
         </div>
       </div>
-      
 
       <!-- Feedback Pagination -->
       <div class="footer" style="margin-top: 2rem;">
+        <div class="data-shown">
+          <p>Showing {{ feedbacks.content?.length }} from {{ feedbacks.totalElements }} reviews</p>
+        </div>
         <div class="pagination">
           <button (click)="goToFirstPage()" [disabled]="page === 0">
-            <i class="fa-solid fa-angles-left"></i>
+            <i class="fas fa-angles-left"></i>
           </button>
           <button (click)="goToPreviousPage()" [disabled]="page === 0">
-            <i class="fa fa-chevron-left"></i> Previous
+            <i class="fas fa-chevron-left"></i> Previous
           </button>
-
           <div class="number">
             
-             <a  *ngFor="let pageIndex of pages"
+             <a *ngFor="let pageIndex of pages"
               href="javascript:void(0)"
               (click)="gotToPage(pageIndex)"
               [class.active]="page === pageIndex"
             >{{ pageIndex + 1 }}</a>
           </div>
-
           <button (click)="goToNextPage()" [disabled]="isLastPage">
-            Next <i class="fa fa-chevron-right"></i>
+            Next <i class="fas fa-chevron-right"></i>
           </button>
           <button (click)="goToLastPage()" [disabled]="isLastPage">
-            <i class="fa-solid fa-angles-right"></i>
+            <i class="fas fa-angles-right"></i>
           </button>
         </div>
       </div>
