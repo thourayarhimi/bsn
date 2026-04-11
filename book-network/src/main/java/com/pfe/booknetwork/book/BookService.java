@@ -5,6 +5,7 @@ import com.pfe.booknetwork.exception.OperationNotPermittedException;
 import com.pfe.booknetwork.file.FileStorageService;
 import com.pfe.booknetwork.history.BookTransactionHistory;
 import com.pfe.booknetwork.history.BookTransactionHistoryRepository;
+import com.pfe.booknetwork.keycloak.KeycloakUserService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +33,7 @@ public class BookService {
     private final BookMapper bookMapper;
     private final BookTransactionHistoryRepository transactionHistoryRepository;
     private final FileStorageService fileStorageService;
+    private final KeycloakUserService keycloakUserService;
 
     public Integer save(BookRequest request, Authentication connectedUser) {
     
@@ -50,7 +52,7 @@ public class BookService {
       
         Pageable pageable = PageRequest.of(page, size, Sort.by("createdDate").descending());
         Page<Book> books = bookRepository.findAllDisplayableBooks(pageable, connectedUser.getName());
-        List<BookResponse> booksResponse = books.stream()
+       List<BookResponse> booksResponse = books.stream()
                 .map(bookMapper::toBookResponse)
                 .toList();
         return new PageResponse<>(
@@ -186,7 +188,16 @@ public class BookService {
         Pageable pageable = PageRequest.of(page, size, Sort.by("createdDate").descending());
         Page<BookTransactionHistory> allBorrowedBooks = transactionHistoryRepository.findAllBorrowedBooks(pageable,connectedUser.getName());
         List<BorrowedBookResponse> booksResponse = allBorrowedBooks.stream()
-                .map(bookMapper::toBorrowedBookResponse)
+                .map(history -> {
+                    BorrowedBookResponse response = bookMapper.toBorrowedBookResponse(history);
+                    response.setBorrowedBy(
+                            keycloakUserService.getUserFullName(history.getUserId())
+                    );
+                    response.setOwnedBy(
+                            keycloakUserService.getUserFullName(history.getBook().getCreatedBy())
+                    );
+                    return response;
+                })
                 .toList();
         return new PageResponse<>(
                 booksResponse,

@@ -50,3 +50,8 @@ application:
       photos-output-path: ./uploads
 server:
   port: 8088
+keycloak:
+  auth-server-url: http://57.129.114.49:9090
+  realm: book-social-network
+  admin-client-id: admin
+  admin-client-secret: admin
