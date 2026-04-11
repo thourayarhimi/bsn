@@ -108,7 +108,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
                 .addEndpoint("/ws")
 
 
-                .setAllowedOrigins("http://localhost:4200","http://57.129.114.49:8080")
+                .setAllowedOriginPatterns("http://57.129.114.49:8080")
 
 
                 .withSockJS();
