@@ -12,6 +12,7 @@ import {ToastrService} from 'ngx-toastr';
 
 import {Notification}  from './Notification'
 import { Stomp } from '@stomp/stompjs';
+import * as SockJS from 'sockjs-client';
 
 @Component({
   selector: 'app-menu',
@@ -39,7 +40,8 @@ export class MenuComponent implements OnInit , OnDestroy {
 
 
 
-      let ws = new WebSocket('ws://57.129.114.49:8088/api/v1/ws');
+   
+let ws = new SockJS('http://57.129.114.49:8088/api/v1/ws');
 
 
       this.socketClient = Stomp.over(ws);
