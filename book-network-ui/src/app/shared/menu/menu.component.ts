@@ -38,7 +38,9 @@ export class MenuComponent implements OnInit , OnDestroy {
   
 ngOnInit(): void {
   if (this.keycloakService.keycloak.tokenParsed?.sub) {
-    this.socketClient = Stomp.over(() => new SockJS('http://57.129.114.49:8088/api/v1/ws'));
+  //  this.socketClient = Stomp.over(() => new SockJS('http://57.129.114.49:8088/api/v1/ws'));
+    this.socketClient = Stomp.over(() => new SockJS('/api/v1/ws'));
+
     
     this.socketClient.connect(
       { 'Authorization': 'Bearer ' + this.keycloakService.keycloak.token },
