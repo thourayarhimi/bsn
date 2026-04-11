@@ -15,6 +15,7 @@ import { KeycloakService } from './services/keycloak/keycloak.service';
 import { HomeComponent } from './pages/home/home.component';
 
 import { SharedModule } from './shared/shared.module';
+import { ToastrModule } from 'ngx-toastr';
 
   export function kcFactory(kcService: KeycloakService) {
     return () => kcService.init();
@@ -32,7 +33,30 @@ import { SharedModule } from './shared/shared.module';
     FormsModule,
     CodeInputModule,
     RouterModule,
-    SharedModule
+    SharedModule,
+    ToastrModule.forRoot({
+
+
+
+      progressBar: true,
+
+
+      closeButton: true,
+
+
+      newestOnTop: true,
+
+
+      tapToDismiss: true,
+
+
+      positionClass: 'toast-bottom-right',
+
+
+      timeOut: 8000
+
+
+    })
   ],
   providers: [
    HttpClient,

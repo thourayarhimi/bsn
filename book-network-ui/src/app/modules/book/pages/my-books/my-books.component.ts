@@ -3,6 +3,7 @@ import {PageResponseBookResponse} from '../../../../services/models/page-respons
 import {BookService} from '../../../../services/services/book.service';
 import {BookResponse} from '../../../../services/models/book-response';
 import {Router} from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-my-books',
@@ -19,7 +20,8 @@ export class MyBooksComponent implements OnInit {
 
   constructor(
     private bookService: BookService,
-    private router: Router
+    private router: Router,
+    private toastService: ToastrService
   ) {
   }
 
@@ -77,6 +79,7 @@ export class MyBooksComponent implements OnInit {
     }).subscribe({
       next: () => {
         book.archived = !book.archived;
+        this.toastService.info('Book "Archive" status has been successfully updated', 'Done');
       }
     });
   }
@@ -87,6 +90,7 @@ export class MyBooksComponent implements OnInit {
     }).subscribe({
       next: () => {
         book.shareable = !book.shareable;
+        this.toastService.info('Book "Shareable" status has been successfully updated', 'Done');
       }
     });
   }

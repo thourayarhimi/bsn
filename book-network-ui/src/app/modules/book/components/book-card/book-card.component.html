@@ -31,23 +31,23 @@
 
   <!-- Normal mode: borrow + details -->
   <div class="card-actions" *ngIf="!manage">
-    <button class="borrow-btn" (click)="onBorrow()" [disabled]="!book.shareable || book.archived">
+    <button class="borrow-btn cursor-pointer" (click)="onBorrow()" [disabled]="!book.shareable || book.archived">
       <i class="fas fa-book-open"></i> Borrow
     </button>
-    <button class="details-btn" (click)="onShowDetails()">
+    <button class="details-btn cursor-pointer" (click)="onShowDetails()">
       <i class="fas fa-circle-info"></i>
     </button>
   </div>
 
   <!-- Manage mode: edit + share + archive -->
   <div class="card-actions" *ngIf="manage">
-    <button class="borrow-btn" (click)="onEdit()">
+    <button class="borrow-btn cursor-pointer" (click)="onEdit()">
       <i class="fas fa-edit"></i> Edit
     </button>
-    <button class="details-btn" (click)="onShare()">
+    <button class="details-btn cursor-pointer" (click)="onShare()">
       <i class="fas fa-share-nodes"></i>
     </button>
-    <button class="archive-btn" (click)="onArchive()">
+    <button class="archive-btn cursor-pointer" (click)="onArchive()">
       <i class="fas fa-archive"></i>
     </button>
   </div>
