@@ -39,7 +39,7 @@ export class MenuComponent implements OnInit , OnDestroy {
 
 
 
-      let ws = new WebSocket('http://57.129.114.49:8088/api/v1/ws');
+      let ws = new WebSocket('ws://57.129.114.49:8088/api/v1/ws');
 
 
       this.socketClient = Stomp.over(ws);
