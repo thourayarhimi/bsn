@@ -215,7 +215,16 @@ public class BookService {
         Pageable pageable = PageRequest.of(page, size, Sort.by("createdDate").descending());
         Page<BookTransactionHistory> allBorrowedBooks = transactionHistoryRepository.findAllReturnedBooks(pageable, connectedUser.getName());
         List<BorrowedBookResponse> booksResponse = allBorrowedBooks.stream()
-                .map(bookMapper::toBorrowedBookResponse)
+                .map(history -> {
+                    BorrowedBookResponse response = bookMapper.toBorrowedBookResponse(history);
+                    response.setBorrowedBy(
+                            keycloakUserService.getUserFullName(history.getUserId())
+                    );
+                    response.setOwnedBy(
+                            keycloakUserService.getUserFullName(history.getBook().getCreatedBy())
+                    );
+                    return response;
+                })
                 .toList();
         return new PageResponse<>(
                 booksResponse,
